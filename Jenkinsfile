@@ -1,10 +1,9 @@
 pipeline {
   agent any
   stages {
-    stage('check updates') {
-      agent any
+    stage('shell') {
       steps {
-        git(url: 'http://corpserver.tk/home/Final-Project', branch: 'main')
+        sh 'echo "HFIDUSFSUHFBKJUSBFUIOSHGFISF"'
       }
     }
 
