@@ -53,13 +53,6 @@ Vagrant.configure("2") do |config|
     SHELL
   end
 end
-  # config.vm.provision "ansible" do |ansible|
-  #   ansible.verbose = "v"
-  #   # ansible.playbook = "ans-install-docker.yaml"
-  #   # ansible.playbook = "ans-inst-webserver.yaml"   # 1. inventory file - и по нему установка
-  #   # ansible.playbook = "ans-inst-jenkins.yaml"     # 2. через Vagrant и Dockerfile/docker-compose.yml
-  #   # ansible.playbook = "ans-inst-jenkins2.yaml"
-  # end
 
 
 
