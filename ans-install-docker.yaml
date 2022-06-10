@@ -1,0 +1,72 @@
+---
+- hosts: jenkins
+  become: true
+  become_method: sudo
+  become_user: root
+  vars:
+    default_container_name: docker
+    default_container_command: sleep 1d
+  tasks:
+    - name: Update cache & Full system update
+      apt:
+        update_cache: true
+        # cache_valid_time: 3600
+        force_apt_get: true
+    - name: Update packages and upgrade
+      apt:
+        update_cache: true
+        upgrade: dist
+        force_apt_get: true
+    - name: Update all packages to their latest version
+      apt:
+        name: "*"
+        state: latest
+    - name: Remove useless packages from the cache
+      apt:
+        autoclean: yes
+    - name: Remove dependencies that are no longer required
+      apt:
+        autoremove: yes
+
+    - name: Install aptitude
+      apt:
+        name: aptitude
+        state: latest
+        update_cache: true
+    - name: Install required system packages
+      apt:
+        pkg:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - python3-pip
+          - virtualenv
+          - python3-setuptools
+          - net-tools
+          - mc
+          - tldr
+        state: latest
+        update_cache: true
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu focal stable
+        state: present
+    - name: Update apt and install docker-ce
+      apt:
+        name: docker-ce
+        state: latest
+        update_cache: true
+    - name: Install Docker Module for Python
+      pip:
+        name: docker
+    - name: Install docker-compose from official github repo
+      remote_user: ansible_ubuntu_demo
+      get_url:
+        url: https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
+        dest: /usr/local/bin/docker-compose
+        mode: "u+x,g+x"

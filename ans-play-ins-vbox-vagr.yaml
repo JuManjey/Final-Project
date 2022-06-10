@@ -1,0 +1,78 @@
+---
+- hosts: 127.0.0.1
+  become: true
+  become_method: sudo
+  become_user: root
+  tasks:
+    - name: Update cache & Full system update
+      apt:
+        update_cache: true
+        force_apt_get: true
+    - name: Update packages and upgrade
+      apt:
+        update_cache: true
+        upgrade: dist
+        force_apt_get: true
+    - name: Update all packages to their latest version
+      apt:
+        name: "*"
+        state: latest
+    - name: Remove useless packages from the cache
+      apt:
+        autoclean: yes
+    - name: Remove dependencies that are no longer required
+      apt:
+        autoremove: yes
+    - name: Install aptitude
+      apt:
+        name: aptitude
+        state: latest
+        update_cache: true
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://apt.releases.hashicorp.com/gpg
+        state: present
+    - name: Add Vagrant Repository
+      apt_repository:
+        repo: deb https://apt.releases.hashicorp.com focal stable
+        state: present
+    - name: Install required system packages
+      apt:
+        pkg:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - python3-pip
+          - virtualenv
+          - python3-setuptools
+          - net-tools
+          - mc
+          - tldr
+          - xubuntu-desktop
+          - x2goserver
+          - x2goserver-xsession
+          - x2goclient
+          - linux-headers-generic
+          - build-essential
+          - dkms
+          - virtualbox
+          - virtualbox-ext-pack
+          - virtualbox-guest-additions-iso
+          - virtualbox-qt
+          - openjdk-11-jdk
+          - openjdk-11-jre
+          - vagrant
+        state: latest
+        update_cache: true
+    - name: VboxDrievr verification
+      shell:
+        cmd: modprobe vboxdrv
+      become_user: root
+    - name: VboxDrievr verification
+      shell:
+        cmd: modprobe vboxnetadp
+      become_user: root
+    - name: Vagrant Up
+      command: vagrant up
+      become_user: root
