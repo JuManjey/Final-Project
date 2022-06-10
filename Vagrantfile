@@ -2,7 +2,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "web" do |subconfig|
     subconfig.vm.box = "ubuntu/focal64"
-    subconfig.vm.network "private_network", ip: "192.168.56.105"
+    subconfig.vm.network "private_network", ip: "192.168.56.105", name: "vboxnet0"
     subconfig.vm.network "forwarded_port", id: "http",host: 80, guest_ip: "192.168.56.105", guest: 80
     subconfig.vm.network "forwarded_port", id: "jenkins", host: 8081, guest_ip: "192.168.56.105", guest: 8080
     subconfig.vm.network "forwarded_port", id: "jenkins2", host: 50010, guest_ip: "192.168.56.105", guest: 50000
