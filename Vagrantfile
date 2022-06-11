@@ -55,10 +55,10 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "ansible" do |ansible|
     ansible.verbose = "v"
-    ansible.playbook = "ans-install-docker.yaml"
-    ansible.playbook = "ans-plbk-install-docker-web.yaml"  
-    ansible.playbook = "ans-plbk-install-docker-jenkins.yaml"     
-    ansible.playbook = "ans-plbk-install-docker-jenkins2.yaml"
+    ansible.playbook = "ans-install-docker.yml"
+    ansible.playbook = "ans-plbk-install-docker-web.yml"  
+    ansible.playbook = "ans-plbk-install-docker-jenkins.yml"     
+    ansible.playbook = "ans-plbk-install-docker-jenkins2.yml"
    end
 
 end
