@@ -6,6 +6,6 @@ docker service create --replicas=3 --network ingress sismics/apache2
 docker service create --replicas=3 --network ingress jenkins/jenkins:lts-jdk11
 
 
-gjghj
+
  "Source": "/var/lib/docker/volumes/jenkins_home/_data/workspace",
                 "Destination": "/var/www/html",
