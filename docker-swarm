@@ -1,7 +1,7 @@
 docker network create --driver overlay --attachable ingress
 docker network create --driver overlay --attachable ingress2
 docker network create --driver overlay --attachable ingress3
-1
+
 docker service create --replicas=3 --network ingress sismics/apache2
 docker service create --replicas=3 --network ingress jenkins/jenkins:lts-jdk11
 
