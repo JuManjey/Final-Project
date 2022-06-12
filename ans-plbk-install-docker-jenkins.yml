@@ -7,4 +7,6 @@
         update_cache: true
         force_apt_get: true
     - name: raw
-      raw: docker run -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts-jdk11
+      raw: mkdir /home/vagrant/jenkins
+    - name: raw
+      raw: docker run --name jenkins-master -p 8080:8080 -p 50000:50000 -v /home/vagrant/jenkins:/var/jenkins_home -u root jenkins/jenkins:lts-jdk11
