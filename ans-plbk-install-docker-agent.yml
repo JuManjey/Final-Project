@@ -1,0 +1,12 @@
+---
+- hosts: jenkins2
+  become: true
+  tasks:
+    - name: Update cache & Full system update
+      apt:
+        update_cache: true
+        force_apt_get: true
+    - name: raw
+      raw: mkdir /home/vagrant/jenkins
+    - name: raw
+      raw: docker run -d --name jenkins-master -p 8081:8080 -p 50001:50000 -v /home/vagrant/jenkins:/var/jenkins_home -u root jenkins/jenkins:lts-jdk11
