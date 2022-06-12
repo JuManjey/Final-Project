@@ -9,4 +9,4 @@
     - name: raw
       raw: mkdir /home/vagrant/jenkins
     - name: raw
-      raw: docker run -d --name jenkins-agent -p 8081:8080 -p 50001:50000 -v /home/vagrant/jenkins:/var/jenkins_home -u root jenkins/jenkins:lts-jdk11
+      raw: docker run --name jenkins-agent -p 8080:8080 -p 50000:50000 -v /home/vagrant/jenkins:/var/jenkins_home -u root jenkins/jenkins:lts-jdk11
