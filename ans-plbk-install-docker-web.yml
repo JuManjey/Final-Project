@@ -8,3 +8,4 @@
         force_apt_get: true
     - name: raw
       raw: docker run -d -h apache2 --name apache2 -p 80:80 -p 443:443 -v apache2volume:/var/www/html sismics/apache2
+      # Variant 2 = docker run -d --name apahce-3 -e TZ=UTC -p 80:80 -p 443:443 -v /var/www/html:/var/www/html ubuntu/apache2
